@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-title>ثبت نام</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="signupFormGroup" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="کد ملی" formControlName="NationalCode">
+          <mat-error
+            *ngIf="signupFormGroup.get('NationalCode').hasError('required')&&signupFormGroup.get('NationalCode').errors['required']">
+            کد ملی را وارد کنید
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="شماره موبایل" formControlName="MobileNumber">
+          <mat-error
+            *ngIf="signupFormGroup.get('MobileNumber').hasError('required')&&signupFormGroup.get('MobileNumber').errors['required']">
+            شماره موبایل را وارد کنید
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="نام" formControlName="FirstName">
+          <mat-error
+            *ngIf="signupFormGroup.get('FirstName').hasError('required')&&signupFormGroup.get('FirstName').errors['required']">
+            نام را وارد کنید
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="نام خانوادگی" formControlName="LastName">
+          <mat-error
+            *ngIf="signupFormGroup.get('LastName').hasError('required')&&signupFormGroup.get('LastName').errors['required']">
+            نام خانوادگی را وارد کنید
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="رمزعبور" formControlName="Password">
+          <mat-error
+            *ngIf="signupFormGroup.get('Password').hasError('required')&&signupFormGroup.get('Password').errors['required']">
+            رمزعبور را وارد کنید
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="تکرار رمزعبور" formControlName="ConfirmPassword">
+          <mat-error
+            *ngIf="signupFormGroup.get('ConfirmPassword').hasError('required')&&signupFormGroup.get('ConfirmPassword').errors['required']">
+            تکرار رمزعبور را وارد کنید
+          </mat-error>
+          <mat-error *ngIf="signupFormGroup.get('ConfirmPassword').hasError('MatchFields')&&signupFormGroup.get('ConfirmPassword').errors['MatchFields']">
+              رمزعبور با تکرارش مطابقت ندارد
+            </mat-error>
+        </mat-form-field>
+      </p>
+
+      <div class="button">
+        <button type="submit" mat-button>ثبت نام</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <button  mat-button type="submit" class="back-button" routerLink="/login">ورود</button>
+</mat-card>

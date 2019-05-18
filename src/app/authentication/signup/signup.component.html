@@ -51,7 +51,7 @@
       </p>
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="تکرار رمزعبور" formControlName="ConfirmPassword">
+          <input type="password" matInput placeholder="تکرار رمزعبور" formControlName="ConfirmPassword">
           <mat-error
             *ngIf="signupFormGroup.get('ConfirmPassword').hasError('required')&&signupFormGroup.get('ConfirmPassword').errors['required']">
             تکرار رمزعبور را وارد کنید

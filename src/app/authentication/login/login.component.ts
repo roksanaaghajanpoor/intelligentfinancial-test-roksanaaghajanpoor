@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.loginFormGroup.getRawValue())
       .subscribe((response: LoginResponse) => {
-        this.router.navigate(['/bookList'])
+        this.router.navigate(['/bookList']);
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
       }

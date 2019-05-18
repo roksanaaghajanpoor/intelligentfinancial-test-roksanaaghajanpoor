@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { IbookData } from '../book-data.interface';
 
@@ -8,7 +8,7 @@ import { IbookData } from '../book-data.interface';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent {
+export class BookListComponent implements OnInit {
 
   displayedColumns = ['ID', 'BirthDate', 'JobTitle', 'HireDate'];
   dataSource: MatTableDataSource<IbookData>;
@@ -16,24 +16,26 @@ export class BookListComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
     this.getBooksList();
   }
 
   getBooksList(): void {
     this.authService.getBooksList().subscribe((response) => {
-      for (let i = 0; i <= response.length; i++) { this.users.push(response[i]); }
-      this.users.push(response);
+      this.users = response;
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
 
-  applyFilter(filterValue: string): void {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
 

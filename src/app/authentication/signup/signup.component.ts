@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatchValidator } from 'src/validators/match-validator';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class SignupComponent implements OnInit {
       this.authService.signup(this.signupFormGroup.getRawValue())
       .subscribe((response) => {
         console.log(response);
-        this.signupFormGroup.reset();
+        this.router.navigate(['/login']);
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
         this.signupFormGroup.reset();
